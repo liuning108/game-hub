@@ -10,7 +10,7 @@ import GameCarcContainer from './GameCarcContainer';
  * 
  */
 function GameGrid() {
-  const { games, error,isLoading } = useGames();
+  const { data:games, error,isLoading } = useGames();
 
   const skeletons =isLoading && [...new Array(10)].map((_, i) => <GameCarcContainer key={i}><GameCardSkeleton  /></GameCarcContainer>);
 
