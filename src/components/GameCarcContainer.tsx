@@ -6,9 +6,9 @@ interface Props {
 }
 const GameCarcContainer = ({children}:Props) => {
   return (
-     <Box width={{ base: "100%", md: "320px" }} borderRadius={10} overflow={"hidden"}>
+     <Box width={{ base: "100%", md: "300px" }} borderRadius={10} overflow={"hidden"}>
        {children}
-     </Box>
+     </Box> 
   )
 }
 
