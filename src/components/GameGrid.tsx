@@ -3,14 +3,19 @@ import useGames from "../hooks/useGame";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCarcContainer from './GameCarcContainer';
+import { Genre } from "../hooks/useGenres";
 /**
  * 这个函数渲染游戏列表，并在获取游戏数据时处理任何错误。
  *
  * @return {JSX.Element} 游戏列表或错误消息。
  * 
  */
-function GameGrid() {
-  const { data:games, error,isLoading } = useGames();
+
+interface Props {
+  selectedGenre: Genre | null
+}
+function GameGrid({selectedGenre}:Props) {
+  const { data:games, error,isLoading } = useGames(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
 
