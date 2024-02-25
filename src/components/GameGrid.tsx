@@ -4,6 +4,8 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCarcContainer from './GameCarcContainer';
 import { Genre } from "../hooks/useGenres";
+import { Platform } from "../hooks/usePlatform";
+import { GameOuery } from "../App";
 /**
  * 这个函数渲染游戏列表，并在获取游戏数据时处理任何错误。
  *
@@ -12,15 +14,16 @@ import { Genre } from "../hooks/useGenres";
  */
 
 interface Props {
-  selectedGenre: Genre | null
+  gameQuery: GameOuery
+
 }
-function GameGrid({selectedGenre}:Props) {
-  const { data:games, error,isLoading } = useGames(selectedGenre);
+function GameGrid({gameQuery}:Props) {
+  const { data:games, error,isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
 
   return (
-    <>
+    <div style={{marginTop:'10px'}}>
       {error && <Text>{error}</Text>}
       <SimpleGrid columns={{sm:1,md:2,lg:3,xl:5}} spacing={3}>
       {isLoading &&
@@ -35,7 +38,7 @@ function GameGrid({selectedGenre}:Props) {
            </GameCarcContainer>
         ))}
       </SimpleGrid>
-    </>
+    </div>
   );
 }
 
