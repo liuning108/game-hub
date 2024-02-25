@@ -11,15 +11,19 @@ import GameCarcContainer from './GameCarcContainer';
  */
 function GameGrid() {
   const { data:games, error,isLoading } = useGames();
-
-  const skeletons =isLoading && [...new Array(10)].map((_, i) => <GameCarcContainer key={i}><GameCardSkeleton  /></GameCarcContainer>);
+  const skeletons = [1, 2, 3, 4, 5, 6];
 
 
   return (
     <>
       {error && <Text>{error}</Text>}
-      <SimpleGrid columns={{sm:1,md:2,lg:3,xl:5}} spacing={10}>
-        {skeletons}
+      <SimpleGrid columns={{sm:1,md:2,lg:3,xl:5}} spacing={3}>
+      {isLoading &&
+        skeletons.map((skeleton) => (
+          <GameCarcContainer key={skeleton}>
+            <GameCardSkeleton />
+          </GameCarcContainer>
+        ))}
         {games.map((g) => (
           <GameCarcContainer key={g.id}>
            <GameCard game={g} ></GameCard>

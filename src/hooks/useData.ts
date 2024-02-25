@@ -14,8 +14,6 @@ const useData = <T>(endpoint :string) => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    setError("");
-    setData([]);
     setLoading(true);
     const controller = new AbortController();
     apiClient
@@ -23,16 +21,18 @@ const useData = <T>(endpoint :string) => {
         signal: controller.signal,
       })
       .then((res) => {
-        setData(res.data.results);
         setTimeout(() => {
           setLoading(false);
-        }, 200);
+        }, 1000);
+        setData(res.data.results);
+        
       })
-      .catch((err) => {
+      .catch((err :any) => {
+        console.log(err)
         setError(err instanceof CanceledError ? "" : err.message);
         setTimeout(() => {
           setLoading(false);
-        }, 200);
+        }, 5000);
       });
 
     return () => {
