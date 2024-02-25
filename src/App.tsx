@@ -19,7 +19,8 @@ import SortSelector from "./components/SortSelector";
 export interface GameOuery {
   genre: Genre | null;
   platform: Platform | null;
-  sortOrder :string;
+  sortOrder: string;
+  searchText: string | null;
 }
 const App = () => {
   const [gameQuery, setGameQuery] = useState<GameOuery>({} as GameOuery);
@@ -36,7 +37,9 @@ const App = () => {
       }}
     >
       <GridItem area={"nav"}>
-        <NavBar />
+        <NavBar
+          onSeach={(searchText) => setGameQuery({ ...gameQuery, searchText })}
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={5}>
@@ -54,7 +57,12 @@ const App = () => {
               setGameQuery({ ...gameQuery, platform: p })
             }
           />
-          <SortSelector  onSelectSortOrder={(sortOrder)=>setGameQuery({...gameQuery,sortOrder})} sortOrder={gameQuery.sortOrder}/>
+          <SortSelector
+            onSelectSortOrder={(sortOrder) =>
+              setGameQuery({ ...gameQuery, sortOrder })
+            }
+            sortOrder={gameQuery.sortOrder}
+          />
         </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
